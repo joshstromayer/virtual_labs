@@ -187,20 +187,19 @@ document.getElementById("start_pendulum").addEventListener("click", function(eve
     const m_kg = parseFloat(document.getElementById("mass_bob").value)
     const l_cm = parseFloat(document.getElementById("string_length").value)
     const theta_initial = parseFloat(document.getElementById("theta_initial").value)
-    const damping = parseFloat(document.getElementById("damping").value)
-    console.log(damping)
-
+    const damping = document.getElementById("damping").checked
+    
     // const m_kg = 13
     // const l_cm = 30
     // const theta_initial = 45
     // const damping = false
 
-    if (damping === "true") {
-        const model = new Pendulum(m_kg, l_cm, theta_initial)
-        return model
+    let model = null
+
+    if (damping === false) {
+        model = new Pendulum(m_kg, l_cm, theta_initial)
     } else {
-        const model = new PendulumDamping(m_kg, l_cm, theta_initial, damping)
-        return model
+        model = new PendulumDamping(m_kg, l_cm, theta_initial, damping)
     } 
 
     // const model = new Pendulum(m_kg, l_cm, theta_initial, damping) 
