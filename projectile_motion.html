@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virtual Lab</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header><a href="./index.html">Main page</a></header>
+    <main>
+        <h1>Projectile Motion</h1>
+        
+        <form id="projectileForm">
+            <label>Initial Velocity (m/s)
+                <input type="number" id="initial_velocity">
+            </label>
+            <label>Theta (ø)
+                <input type="number" id="theta">
+            </label>
+            <button type="submit" id="start_proj_mot" class="form-button">Calculate</button>
+            <button type="submit" id="reset_proj_mot" class="form-button">Reset</button>
+        </form>
+
+        <canvas id="myCanvas01" width="720" height="300" style="border:1px solid black;">
+        </canvas>
+        
+        <h2>Results</h2>
+        <div id="output">
+            <p>x Position:</p>
+            <p>Height:</p>
+            <p>Time of flight:</p>
+            <p>Horizontal Distance Travelled:</p>
+            <p>Maximum Height Reached: </p>
+        </div>
+    </main>
+    <script src="projectile_motion.js"></script>
+</body>
+</html>
