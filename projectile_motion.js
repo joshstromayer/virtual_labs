@@ -226,9 +226,8 @@ const reset_proj_mot_canvas_example = () => {
     set_proj_template_example()
 }
 
-const start_proj_mot_example = document.getElementById("start_proj_mot_example")
-if (start_proj_mot_example) {
-    start_proj_mot_example.addEventListener("click", function(event) {
+if (canvas01a) {
+    canvas01a.addEventListener("mouseenter", (event) => {
         event.preventDefault();
         reset_proj_mot_canvas_example()
 
@@ -262,5 +261,9 @@ if (start_proj_mot_example) {
                 return t;
             
         }
-    });
+    })
+    start_proj_mot_example.addEventListener("mouseover", (event) => {
+        reset_proj_mot_canvas_example();
+    })
 }
+

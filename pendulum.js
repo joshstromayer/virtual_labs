@@ -66,6 +66,10 @@ class Pendulum {
                 return (this.calculate_x_position()*100)+360
             };
 
+            this.calculate_x_position_canvas_example = () => {
+                return (this.calculate_x_position()*50)+180
+            };
+
             this.change_x_pos = () => {
                 pass
             }
@@ -76,6 +80,10 @@ class Pendulum {
 
             this.calculate_y_position_canvas = () => {
                 return this.calculate_y_position()*800+30+this.l_m*800
+            }
+
+            this.calculate_y_position_canvas_example = () => {
+                return this.calculate_y_position()*400+15+this.l_m*400
             }
 
             this.change_y_pos = () => {
@@ -136,30 +144,26 @@ class Pendulum {
             ctx.stroke()
         }
 
-        set_template() {
-            ctx.beginPath()
-            ctx.moveTo(360, 30)
-            ctx.lineTo(360, 270)
-            ctx.stroke()
-
-            ctx.beginPath()
-            ctx.arc(360, 30, 4, 0, 2*Math.PI)
-            ctx.stroke()
-
-            ctx.beginPath()
-            ctx.arc(360, 270, 8, 0, 2*Math.PI)
-            ctx.stroke()
+        draw_example (t) {
+            ctx02a.clearRect(0, 0, 360, 150)
+            ctx02a.beginPath()
+            ctx02a.moveTo(180, 15);
+            ctx02a.lineTo(this.calculate_x_position_canvas_example(), this.calculate_y_position_canvas_example());
+            ctx02a.stroke()
+            
+            ctx02a.beginPath()
+            ctx02a.arc(180, 15, 2, 0, 2*Math.PI)
+            ctx02a.stroke()
+            
+            ctx02a.beginPath()
+            ctx02a.arc(this.calculate_x_position_canvas_example(), this.calculate_y_position_canvas_example(), 4, 0, 2*Math.PI)
+            ctx02a.stroke()
         }
-
 }
 
 class PendulumDamping {
 
 }
-
-const canvas = document.getElementById("myCanvas");
-const ctx = canvas.getContext("2d");
-ctx.fillStyle = "red";
 
 const set_pendulum_template = () => {
     ctx.beginPath()
@@ -176,70 +180,81 @@ const set_pendulum_template = () => {
     ctx.stroke()
 }
 
-set_pendulum_template()
+const canvas = document.getElementById("myCanvas");
+let ctx = null
+if (canvas) {
+    ctx = canvas.getContext("2d");
+    set_pendulum_template()
+}
+
 
 id_pendulum = setInterval(10)
 
-document.getElementById("start_pendulum").addEventListener("click", function(event) {
-    event.preventDefault();
-    reset_pendulum_canvas();
-
-    const m_kg = parseFloat(document.getElementById("mass_bob").value)
-    const l_cm = parseFloat(document.getElementById("string_length").value)
-    const theta_initial = parseFloat(document.getElementById("theta_initial").value)
-    const damping = document.getElementById("damping").checked
+const start_pendulum = document.getElementById("start_pendulum")
+if (start_pendulum) {
+    start_pendulum.addEventListener("click", function(event) {
+        event.preventDefault();
+        reset_pendulum_canvas();
     
-    // const m_kg = 13
-    // const l_cm = 30
-    // const theta_initial = 45
-    // const damping = false
-
-    let model = null
-
-    if (damping === false) {
-        model = new Pendulum(m_kg, l_cm, theta_initial)
-    } else {
-        model = new PendulumDamping(m_kg, l_cm, theta_initial, damping)
-    } 
-
-    // const model = new Pendulum(m_kg, l_cm, theta_initial, damping) 
-    
-    id_pendulum = setInterval(increment_time, 10)
-
-    let t = 0
-
-    function increment_time() {
-        t=t+0.01;
+        const m_kg = parseFloat(document.getElementById("mass_bob").value)
+        const l_cm = parseFloat(document.getElementById("string_length").value)
+        const theta_initial = parseFloat(document.getElementById("theta_initial").value)
+        const damping = document.getElementById("damping").checked
         
-        model.step(t)
-
-        // console.log("x_pos: ", model.calculate_x_position())
-        // console.log("y_pos: ", model.calculate_y_position())
-        // console.log("theta_time: ", model.calculate_theta_time(t))
-        // console.log("vert_pos: ", model.calculate_vertical_position())
-        // console.log("ke: ", model.calculate_k_energy())
-        // console.log("pe: ", model.calculate_p_energy())
-        // console.log("total energy: ", model.calculate_total_energy())
-
-        model.draw(t)
+        // const m_kg = 13
+        // const l_cm = 30
+        // const theta_initial = 45
+        // const damping = false
     
-        document.getElementById("pendulum-output").innerHTML = `
-        <p>Period: ${model.period.toFixed(3)}s</p>
-        <p>Kinetic Energy: ${model.calculate_k_energy().toFixed(2)}J</p>
-        <p>Potential Energy: ${model.calculate_p_energy()}J</p>
-        <p>Total Energy: ${model.calculate_total_energy()}J</p>
-        <p>x-Position: ${model.calculate_x_position()*100}cm</p>
-        <p>y-Position: ${model.calculate_y_position()*100}cm</p>
-        `;
-        return t;
-    }
-
-});
-
-document.getElementById("reset_pendulum").addEventListener("click", function(event) {
-    event.preventDefault();
-    reset_pendulum_canvas()
-});
+        let model = null
+    
+        if (damping === false) {
+            model = new Pendulum(m_kg, l_cm, theta_initial)
+        } else {
+            model = new PendulumDamping(m_kg, l_cm, theta_initial, damping)
+        } 
+    
+        // const model = new Pendulum(m_kg, l_cm, theta_initial, damping) 
+        
+        id_pendulum = setInterval(increment_time, 10)
+    
+        let t = 0
+    
+        function increment_time() {
+            t=t+0.01;
+            
+            model.step(t)
+    
+            // console.log("x_pos: ", model.calculate_x_position())
+            // console.log("y_pos: ", model.calculate_y_position())
+            // console.log("theta_time: ", model.calculate_theta_time(t))
+            // console.log("vert_pos: ", model.calculate_vertical_position())
+            // console.log("ke: ", model.calculate_k_energy())
+            // console.log("pe: ", model.calculate_p_energy())
+            // console.log("total energy: ", model.calculate_total_energy())
+    
+            model.draw(t)
+        
+            document.getElementById("pendulum-output").innerHTML = `
+            <p>Period: ${model.period.toFixed(3)}s</p>
+            <p>Kinetic Energy: ${model.calculate_k_energy().toFixed(2)}J</p>
+            <p>Potential Energy: ${model.calculate_p_energy()}J</p>
+            <p>Total Energy: ${model.calculate_total_energy()}J</p>
+            <p>x-Position: ${model.calculate_x_position()*100}cm</p>
+            <p>y-Position: ${model.calculate_y_position()*100}cm</p>
+            `;
+            return t;
+        }
+    
+    });
+}
+const reset_pendulum = document.getElementById("reset_pendulum")
+if (reset_pendulum){
+    reset_pendulum.addEventListener("click", function(event) {
+        event.preventDefault();
+        reset_pendulum_canvas()
+    });
+}
 
 const reset_pendulum_canvas = () => {
     clearInterval(id_pendulum)
@@ -253,4 +268,171 @@ const reset_pendulum_canvas = () => {
     <p>x-Position: 0cm</p>
     <p>y-Position: 0cm</p>
 `;
+}
+
+// pendulum example 
+
+const set_template_example = () => {
+    ctx02a.beginPath()
+    ctx02a.moveTo(180, 15)
+    ctx02a.lineTo(180, 135)
+    ctx02a.stroke()
+
+    ctx02a.beginPath()
+    ctx02a.arc(180, 15, 2, 0, 2*Math.PI)
+    ctx02a.stroke()
+
+    ctx02a.beginPath()
+    ctx02a.arc(180, 135, 4, 0, 2*Math.PI)
+    ctx02a.stroke()
+}
+
+const canvas02a = document.getElementById("myCanvas02a");
+let ctx02a = null
+if(canvas02a) {
+    ctx02a = canvas02a.getContext("2d");
+    set_template_example()
+}
+
+const reset_pendulum_canvas_example = () => {
+    clearInterval(id_pendulum)
+    ctx02a.clearRect(0, 0, 360, 150)
+    set_template_example()
+}
+
+const start_pendulum_example = document.getElementById("start_pendulum_example")
+if (start_pendulum_example){
+    start_pendulum_example.addEventListener("click", function(event) {
+        event.preventDefault();
+        reset_pendulum_canvas_example();
+        
+        const m_kg = 10
+        const l_cm = 30
+        const theta_initial = 35
+        const damping = false
+    
+        let model = null
+    
+        if (damping === false) {
+            model = new Pendulum(m_kg, l_cm, theta_initial)
+        } else {
+            model = new PendulumDamping(m_kg, l_cm, theta_initial, damping)
+        } 
+    
+        // const model = new Pendulum(m_kg, l_cm, theta_initial, damping) 
+        
+        id_pendulum = setInterval(increment_time, 10)
+    
+        let t = 0
+    
+        function increment_time() {
+            t=t+0.01;
+            
+            model.step(t)
+    
+            // console.log("x_pos: ", model.calculate_x_position())
+            // console.log("y_pos: ", model.calculate_y_position())
+            // console.log("theta_time: ", model.calculate_theta_time(t))
+            // console.log("vert_pos: ", model.calculate_vertical_position())
+            // console.log("ke: ", model.calculate_k_energy())
+            // console.log("pe: ", model.calculate_p_energy())
+            // console.log("total energy: ", model.calculate_total_energy())
+    
+            model.draw_example(t)
+    
+            return t;
+        }
+    
+    });
+}
+
+if (canvas02a){
+    canvas02a.addEventListener("click", function(event) {
+        event.preventDefault();
+        reset_pendulum_canvas_example();
+        
+        const m_kg = 10
+        const l_cm = 30
+        const theta_initial = 35
+        const damping = false
+    
+        let model = null
+    
+        if (damping === false) {
+            model = new Pendulum(m_kg, l_cm, theta_initial)
+        } else {
+            model = new PendulumDamping(m_kg, l_cm, theta_initial, damping)
+        } 
+    
+        // const model = new Pendulum(m_kg, l_cm, theta_initial, damping) 
+        
+        id_pendulum = setInterval(increment_time, 10)
+    
+        let t = 0
+    
+        function increment_time() {
+            t=t+0.01;
+            
+            model.step(t)
+    
+            // console.log("x_pos: ", model.calculate_x_position())
+            // console.log("y_pos: ", model.calculate_y_position())
+            // console.log("theta_time: ", model.calculate_theta_time(t))
+            // console.log("vert_pos: ", model.calculate_vertical_position())
+            // console.log("ke: ", model.calculate_k_energy())
+            // console.log("pe: ", model.calculate_p_energy())
+            // console.log("total energy: ", model.calculate_total_energy())
+    
+            model.draw_example(t)
+    
+            return t;
+        }
+    
+    });
+    canvas02a.addEventListener("mouseenter", function(event) {
+        event.preventDefault();
+        reset_pendulum_canvas_example();
+        
+        const m_kg = 10
+        const l_cm = 30
+        const theta_initial = 35
+        const damping = false
+    
+        let model = null
+    
+        if (damping === false) {
+            model = new Pendulum(m_kg, l_cm, theta_initial)
+        } else {
+            model = new PendulumDamping(m_kg, l_cm, theta_initial, damping)
+        } 
+    
+        // const model = new Pendulum(m_kg, l_cm, theta_initial, damping) 
+        
+        id_pendulum = setInterval(increment_time, 10)
+    
+        let t = 0
+    
+        function increment_time() {
+            t=t+0.01;
+            
+            model.step(t)
+    
+            // console.log("x_pos: ", model.calculate_x_position())
+            // console.log("y_pos: ", model.calculate_y_position())
+            // console.log("theta_time: ", model.calculate_theta_time(t))
+            // console.log("vert_pos: ", model.calculate_vertical_position())
+            // console.log("ke: ", model.calculate_k_energy())
+            // console.log("pe: ", model.calculate_p_energy())
+            // console.log("total energy: ", model.calculate_total_energy())
+    
+            model.draw_example(t)
+    
+            return t;
+        }
+    
+    });
+    canvas02a.addEventListener("mouseover", function(event) {
+        event.preventDefault();
+        reset_pendulum_canvas_example();
+    })
 }

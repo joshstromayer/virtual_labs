@@ -1,7 +1,44 @@
 html {
-    width: 720px;
-    margin: 0 auto;
-    align-items: center;
+    width: 1024px;
+}
+
+body {
+    max-width: 100%;
+    padding: 20px;
+    margin: 0;
+    background-color: rgb(245, 247, 255);
+}
+
+header {
+    height: 60px;
+}
+
+header a {
+    text-decoration: none;
+    color: black;
+}
+
+h1 {
+    margin: none;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: auto auto;
+    width: 100%;
+    padding: 5px;
+    max-width: 100%;
+    gap: 20px 10px;
+    background-color: rgb(235, 247, 255);
+}
+
+.grid {
+    width: auto;
+    min-width: 400px;
+    padding: 20px;
+    background-color: rgb(216, 239, 255);
+    display: flex;
+    flex-direction: column;
 }
 
 .form {
@@ -10,10 +47,37 @@ html {
     flex-direction: column;
     gap: 20px;
     padding: 20px;
-
 }
 
 .form-button {
     margin: 10px;
     width: 120px;
+}
+
+.form_button_example {
+    width: 120px;
+    height: 30px;
+    background-color: rgb(100, 162, 198);
+    color: white;
+    border: 0;
+    font-weight: bold;
+    position: absolute;
+    margin-top: 80px;
+}
+
+.view_model {
+    padding: 10px;
+    display: flex;
+    justify-content: right;
+}
+
+.view_model a {
+    text-decoration: none;
+    color: rgb(38, 42, 31);
+    padding: 0 auto;
+    font-weight: bold;
+}
+
+#myCanvas01a, #myCanvas01, #myCanvas02a, #myCanvas02 {
+    background-color: white;
 }

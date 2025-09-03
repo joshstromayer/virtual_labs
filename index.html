@@ -7,27 +7,49 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <header><a href="/index.html"><h1>Virtual Lab</h1></a></header>
     <main>
-        <h1>Projectile Motion</h1>
-        
-        <button type="submit" id="start_proj_mot_example" class="form-button">Calculate</button>
-        <canvas id="myCanvas01a" width="360" height="150" style="border:1px solid black;">
-        </canvas>
 
-        <a href="projectile_motion.html">View Full Model</a>
+        <div class="grid-container">
+            <div class="grid">
+                <h1>Projectile Motion</h1>
+                
+                <canvas id="myCanvas01a" width="360" height="150" style="border:1px solid black;">
+                </canvas>
 
-        
-        <h1>Pendulum</h1>
+                <div class="view_model"><a href="projectile_motion.html">View Full Model</a>           
+                </div>
+            </div>
+            <div class="grid">      
+                <h1>Pendulum</h1>
 
-        <button type="submit" id="start_pendulum_example" class="form-button">Calculate</button>
-        <canvas id="myCanvas02a" width="360" height="150" style="border:1px solid black;">
-        </canvas>
+                <canvas id="myCanvas02a" width="360" height="150" style="border:1px solid black;">
+                </canvas>
 
-        <a href="pendulum.html">View Full Model</a>
+                <div class="view_model"><a href="pendulum.html">View Full Model</a>           
+                </div>
+            </div>
+            <div class="grid">
+                <h1>Projectile Motion</h1>
+                
+                <canvas id="myCanvas01a" width="360" height="150" style="border:1px solid black;">
+                </canvas>
 
+                <div class="view_model"><a href="projectile_motion.html">View Full Model</a>           
+                </div>
+            </div>
+            <div class="grid">      
+                <h1>Pendulum</h1>
 
+                <canvas id="myCanvas02a" width="360" height="150" style="border:1px solid black;">
+                </canvas>
 
+                <div class="view_model"><a href="pendulum.html">View Full Model</a>           
+                </div>
+            </div>
+        </div>
     </main>
     <script src="projectile_motion.js"></script>
+    <script src="pendulum.js"></script>
 </body>
 </html>
