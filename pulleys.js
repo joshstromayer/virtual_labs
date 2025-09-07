@@ -44,11 +44,12 @@ class Pulley {
             return 0.5*this.calculate_acceleration()*(t**2)
         }
 
-        this.calculate_height_2_t = () => {
-            return 
-        }
         this.calculate_height_1_t = () => {
-            return 
+            return this.h_1 + this.calculate_displacement(t)
+        }
+        
+        this.calculate_height_2_t = () => {
+            return this.h_2 - this.calculate_displacement(t)
         }
 
         this.calculate_height_1_t_up = (t) => {
