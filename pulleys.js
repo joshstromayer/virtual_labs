@@ -636,4 +636,54 @@ if (canvas03a) {
     canvas03a.addEventListener("mouseover", (event) => {
         reset_pulley_canvas_example();
     })
+
+    canvas03a.addEventListener("click", function(event) {
+        event.preventDefault();
+        reset_pulley_canvas_example()
+
+        id_pulley = setInterval(increment_time, 10)
+
+        const mkg_1 = 8
+        const mkg_2 = 7
+        const hm_1 = 7.3
+        const hm_2 = 8.8
+
+        let m_1 = null
+        let m_2 = null
+        let h_1 = null
+        let h_2 = null
+
+        if (mkg_1 > mkg_2) {
+            m_1 = mkg_1
+            h_1 = hm_1
+            m_2 = mkg_2
+            h_2 = hm_2
+        } else {
+            m_1 = mkg_2
+            h_1 = hm_2
+            m_2 = mkg_1
+            h_2 = hm_1
+        }
+
+        const model2 = new Pulley(m_1, m_2, h_1, h_2)
+
+        let t = 0;
+        
+        function increment_time() {
+            t += 0.01;
+        
+            model2.step(t)
+        
+            let h1 = model2.calculate_height_1_t(t)
+            let h2 = model2.calculate_height_2_t(t)
+
+            model2.draw_example(t)
+
+            if (h1*10<20 || h2*10<20 || h1*10>295/2 || h2*10>295/2) {
+                pause_pulley_canvas()
+            }
+            
+            return t
+        }
+    })
 }
