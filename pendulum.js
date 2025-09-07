@@ -11,7 +11,7 @@ class Pendulum {
         this.dt = 1
 
         this.angular_frequency = Math.sqrt(this.g_ms2/this.l_m)
-        this.period = 2*Math.PI*Math.sqrt(this.l_m/this.g_ms2)
+        this.period = 2*Math.PI*Math.sqrt(this.l_m/this.g_ms2)*(1+(1/16)*(this.theta_initial**2)+(11/3072)*(this.theta_initial**4))
         this.frequency = 1/(2*Math.PI)*Math.sqrt(this.g_ms2/this.l_m)
         
         if (this.theta_initial !== 0) {
@@ -238,10 +238,10 @@ if (start_pendulum) {
             document.getElementById("pendulum-output").innerHTML = `
             <p>Period: ${model.period.toFixed(3)}s</p>
             <p>Kinetic Energy: ${model.calculate_k_energy().toFixed(2)}J</p>
-            <p>Potential Energy: ${model.calculate_p_energy()}J</p>
-            <p>Total Energy: ${model.calculate_total_energy()}J</p>
-            <p>x-Position: ${model.calculate_x_position()*100}cm</p>
-            <p>y-Position: ${model.calculate_y_position()*100}cm</p>
+            <p>Potential Energy: ${model.calculate_p_energy().toFixed(2)}J</p>
+            <p>Total Energy: ${model.calculate_total_energy().toFixed(2)}J</p>
+            <p>x-Position: ${(model.calculate_x_position()*100).toFixed(2)}cm</p>
+            <p>y-Position: ${(model.calculate_y_position()*100).toFixed(2)}cm</p>
             `;
             return t;
         }
@@ -275,7 +275,7 @@ const reset_pendulum_canvas = () => {
 const set_template_example = () => {
     ctx02a.beginPath()
     ctx02a.moveTo(180, 15)
-    ctx02a.lineTo(180, 135)
+    ctx02a.lineTo(248.8, 113.3)
     ctx02a.stroke()
 
     ctx02a.beginPath()
@@ -283,7 +283,7 @@ const set_template_example = () => {
     ctx02a.stroke()
 
     ctx02a.beginPath()
-    ctx02a.arc(180, 135, 4, 0, 2*Math.PI)
+    ctx02a.arc(248.8, 113.3, 4, 0, 2*Math.PI)
     ctx02a.stroke()
 }
 

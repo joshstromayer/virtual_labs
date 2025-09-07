@@ -93,7 +93,6 @@ class ProjectileMotion {
         
         ctx01a.beginPath()
         ctx01a.arc(this.calculate_x_position_canvas_example(), this.calculate_y_position_canvas_example(), 2, 0, 2*Math.PI)
-        console.log(this.calculate_x_position_canvas_example(), this.calculate_y_position_canvas_example())
         ctx01a.stroke()
     }
 
@@ -105,7 +104,6 @@ let ctx01 = null
 if (canvas01) {
     ctx01 = canvas01.getContext("2d");
 }
-
 
 const set_proj_template = () => {
     ctx01.beginPath()
@@ -144,7 +142,6 @@ if (start_proj_mot) {
         const model1 = new ProjectileMotion(velocity, angleRadians)
 
         let t = 0
-
 
         function increment_time() {
             t=t+0.01;
@@ -262,7 +259,7 @@ if (canvas01a) {
             
         }
     })
-    start_proj_mot_example.addEventListener("mouseover", (event) => {
+    canvas01a.addEventListener("mouseover", (event) => {
         reset_proj_mot_canvas_example();
     })
 }

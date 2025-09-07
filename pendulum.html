@@ -10,36 +10,43 @@
     <header><a href="./index.html">Main page</a></header>
     <main>
         <h1>Pendulum</h1>
+        <div class="model_content">
+            <div class="model_display">
 
-        <form id="pendulumForm" class="form">
-            <div class="label"><label>Mass of Bob (kg)
-                <input type="number" id="mass_bob">
-            </label></div>
-            <div class="label"><label>Length of String (cm)
-                <input type="number" id="string_length">
-            </label></div>
-            <div class="label"><label>Initial Angle (degrees)
-                <input type="number" id="theta_initial">
-            </label></div>
-            <div class="label"><label>Damping
-                <input type="checkbox" id="damping" value="true">
-            </label></div>
-            <button type="submit" id="start_pendulum" class="form-button">Calculate</button>
-            <button type="submit" id="reset_pendulum" class="form-button">Reset</button>
-        </form>
-
-        <canvas id="myCanvas" width="720" height="300" style="border:1px solid black;">
-        </canvas>
-        
-        
-        <h2>Results</h2>
-        <div id="pendulum-output">
-            <p>Period:</p>
-            <p>Kinetic Energy:</p>
-            <p>Potential Energy:</p>
-            <p>Total Energy: </p>
-            <p>x-Position: </p>
-            <p>y-Position: </p>
+                <form id="pendulumForm">
+                    <div class="labels">
+                        <label>Mass of Bob (kg)
+                            <input type="number" id="mass_bob">
+                        </label>
+                        <label>Length of String (cm)
+                            <input type="number" id="string_length">
+                        </label>
+                        <label>Initial Angle (degrees)
+                            <input type="number" id="theta_initial">
+                        </label>
+                        <label>Damping
+                            <input type="checkbox" id="damping" value="true">
+                        </label>
+                    </div>
+                    <div class="buttons">
+                        <button type="submit" id="start_pendulum" class="form-button">Calculate</button>
+                        <button type="submit" id="reset_pendulum" class="form-button">Reset</button>
+                    </div>
+                </form>
+                <canvas id="myCanvas" width="720" height="300" style="border:1px solid black;">
+                </canvas>
+            </div>
+            <div class="model_results">
+                <h2>Results</h2>
+                <div id="pendulum-output">
+                    <p>Period:</p>
+                    <p>Kinetic Energy:</p>
+                    <p>Potential Energy:</p>
+                    <p>Total Energy: </p>
+                    <p>x-Position: </p>
+                    <p>y-Position: </p>
+                </div>
+            </div>
         </div>
     </main>    
     <script src="pendulum.js"></script>

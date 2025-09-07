@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virtual Lab - Pulleys</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header><a href="./index.html">Main page</a></header>
+    <main>
+        <h1>Pulleys</h1>
+        <div class="model_content">
+            <div class="model_display">
+                <form id="projectileForm">
+                    <div class="labels">
+                        <label>Mass 1 (kg)
+                            <input type="number" id="m_1">
+                        </label>
+                        <label>Mass 2 (kg)
+                            <input type="number" id="m_2">
+                        </label>
+                        <label>Initial Height 1 (m)
+                            <input type="number" id="h_1">
+                        </label>
+                        <label>Initial Height 2 (m)
+                            <input type="number" id="h_2">
+                        </label>
+                    </div>
+                    <div class="buttons">
+                        <button type="submit" id="start_pulley" class="form-button">Calculate</button>
+                        <button type="submit" id="reset_pulley" class="form-button">Reset</button>
+                    </div>
+                </form>
+
+                <canvas class="canvas" id="myCanvas03" width="720" height="300" style="border:1px solid black;">
+                </canvas>
+            </div>
+            
+            <div class="model_results">
+                <h2>Results</h2>
+                <div id="output">
+                    <p>M1 Height:</p>
+                    <p>M2 Height:</p>
+                    <p>Tension: </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="data">
+            <h2>Data</h2>
+        </div>
+    </main>
+    <script src="pulleys.js"></script>
+</body>
+</html>
