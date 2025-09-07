@@ -262,5 +262,40 @@ if (canvas01a) {
     canvas01a.addEventListener("mouseover", (event) => {
         reset_proj_mot_canvas_example();
     })
+    canvas01a.addEventListener("click", function(event) {
+            event.preventDefault();
+            reset_proj_mot_canvas_example()
+    
+            id_proj_mot = setInterval(increment_time, 10)
+    
+            const velocity = 45
+            const angleDegrees = 45
+            const angleRadians = angleDegrees * Math.PI / 180
+    
+            const model1 = new ProjectileMotion(velocity, angleRadians)
+    
+            let t = 0
+    
+    
+            function increment_time() {
+                t=t+0.01;
+    
+                model1.step(t)
+    
+                const T = model1.time_of_flight()
+                const R = model1.range()
+                const MH = model1.max_height()
+                const x_pos = model1.calculate_x_position()
+                const y_pos = model1.calculate_y_position_canvas_example()
+    
+                model1.draw_example(t)
+    
+                if(y_pos===138) {
+                    clearInterval(id_proj_mot)
+                }
+                    return t;
+                
+            }
+    })
 }
 
