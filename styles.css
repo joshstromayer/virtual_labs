@@ -129,3 +129,37 @@ h1 {
 .model_results {
     padding: 20px;
 }
+
+table {
+    background-color: white;
+    border-width: 1px;
+    border: 1px solid;
+    border-style: solid;
+    padding: 0;
+}
+
+tbody {
+    padding: 0;
+}
+
+tr {
+    margin-top: 3px;
+    width: 600px;
+    display: flex;
+    flex-direction: row;
+}
+
+td, th {
+    width: 300px;
+    border: 1px solid;
+}
+
+th {
+    height: 30px;
+}
+
+td {
+    height: 20px;
+    width: 280px;
+    text-align: center;
+}

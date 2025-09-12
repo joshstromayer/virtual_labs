@@ -16,8 +16,8 @@ class Pulley {
             return Math.PI * (radius)**2
         }
 
-        this.calculate_tension = (m_1, m_2) => {
-            return ((2*m_1*m_2)/(m_1+m_2))*this.g
+        this.calculate_tension = () => {
+            return ((2*this.m_1*this.m_2)/(this.m_1+this.m_2))*this.g
         }
 
         this.calculate_acceleration = () => {
@@ -42,14 +42,6 @@ class Pulley {
         let h0 = null
         this.calculate_displacement = (t) => {
             return 0.5*this.calculate_acceleration()*(t**2)
-        }
-
-        this.calculate_height_1_t = () => {
-            return this.h_1 + this.calculate_displacement(t)
-        }
-        
-        this.calculate_height_2_t = () => {
-            return this.h_2 - this.calculate_displacement(t)
         }
 
         this.calculate_height_1_t_up = (t) => {
@@ -198,7 +190,6 @@ class Pulley {
 
     draw(t, m1_up) {
         ctx03.clearRect(0, 0, 720, 360)
-        console.log("in draw: ", m1_up)
 
         ctx03.beginPath()
         ctx03.arc(360, 30, 10, 0, 2*Math.PI)
@@ -210,7 +201,6 @@ class Pulley {
         // ctx03.stroke()
 
         if (m1_up === true) {
-            console.log("sdfsdf")
             ctx03.beginPath()
             ctx03.moveTo(355, 30)
             ctx03.lineTo(355, 300-(this.calculate_height_1_t_up(t))*200)
@@ -229,7 +219,6 @@ class Pulley {
             ctx03.arc(365, 300-(this.calculate_height_2_t_down(t))*200, 3, 0, 2*Math.PI)
             ctx03.stroke()
         } else {
-            console.log("ASHDFJSDHFASIFUSHDFIUHDf")
             ctx03.beginPath()
             ctx03.moveTo(355, 30)
             ctx03.lineTo(355, 300-1*(this.calculate_height_1_t_down(t))*200)
@@ -251,9 +240,8 @@ class Pulley {
     
     }
 
-    draw_after_break(t_after, m1_up, hit_floor) {
+    draw_after_break(t, t_after, m1_up, hit_floor) {
         ctx03.clearRect(0, 0, 720, 360)
-        console.log("hitfloor", hit_floor)
 
         ctx03.beginPath()
         ctx03.arc(360, 30, 10, 0, 2*Math.PI)
@@ -279,7 +267,6 @@ class Pulley {
                 ctx03.arc(365, 297, 3, 0, 2*Math.PI)
                 ctx03.stroke()
             } else {
-                console.log("ye buddy")
                 ctx03.beginPath()
                 ctx03.moveTo(355, 30)
                 ctx03.lineTo(355, 43)
@@ -287,7 +274,7 @@ class Pulley {
             
                 ctx03.beginPath()
                 ctx03.moveTo(365, 30)
-                ctx03.lineTo(365, (this.calculate_height_broken_pulley_h1(t_after)*200))
+                ctx03.lineTo(365,  300-(this.calculate_height_2_t_down(t))*200)
                 ctx03.stroke()
             
                 ctx03.beginPath()
@@ -295,7 +282,7 @@ class Pulley {
                 ctx03.stroke()
             
                 ctx03.beginPath()
-                ctx03.arc(365, (this.calculate_height_broken_pulley_h1(t_after)*200), 3, 0, 2*Math.PI)
+                ctx03.arc(365,  300-(this.calculate_height_2_t_down(t))*200, 3, 0, 2*Math.PI)
                 ctx03.stroke()
             }
         } else {
@@ -318,10 +305,9 @@ class Pulley {
                 ctx03.arc(365, 300-(this.calculate_height_broken_h2(t_after)*200), 3, 0, 2*Math.PI)
                 ctx03.stroke()
             } else {
-                console.log("ye buddy")
                 ctx03.beginPath()
                 ctx03.moveTo(355, 30)
-                ctx03.lineTo(355, (this.calculate_height_broken_pulley_h1(t_after)*200))
+                ctx03.lineTo(355,  300-(this.calculate_height_1_t_down(t))*200)
                 ctx03.stroke()
             
                 ctx03.beginPath()
@@ -330,7 +316,7 @@ class Pulley {
                 ctx03.stroke()
             
                 ctx03.beginPath()
-                ctx03.arc(355, (this.calculate_height_broken_pulley_h1(t_after)*200), 3, 0, 2*Math.PI)
+                ctx03.arc(355,   300-(this.calculate_height_1_t_down(t))*200, 3, 0, 2*Math.PI)
                 ctx03.stroke()
             
                 ctx03.beginPath()
@@ -364,6 +350,47 @@ class Pulley {
         ctx03a.beginPath()
         ctx03a.arc(370/2, this.calculate_height_2_t(t)*10, 3, 0, 2*Math.PI)
         ctx03a.stroke()
+    }
+
+    // MAKE COLUMNS FOR KINETIC ENERGY ETC
+    produce_data(t) {
+        let time = t.toFixed(1)*10
+        let h1 = null
+        let h2 = null
+
+        if (this.m_1 > this.m_2) {
+            this.m1_up = false
+        } else {
+            this.m1_up = true
+        }
+
+        if (this.m1_up === true) {
+            h1 = this.calculate_height_1_t_up(t)
+            h2 = this.calculate_height_2_t_down(t)
+        } else {
+            h1 = this.calculate_height_1_t_down(t)
+            h2 = this.calculate_height_2_t_up(t)
+        }
+
+        document.getElementById("data").innerHTML = `
+        <p>Tension: ${this.calculate_tension().toFixed(2)}N</p>
+
+        `;
+
+        if (time % 1 === 0) {
+            console.log("t in data: ", time)
+
+            let id = "pulley" + time
+
+            document.getElementById(id).style.display='block'
+
+            document.getElementById(id).innerHTML = `
+                <td>${time/10}s</td>
+                <td>${h1.toFixed(2)}m</td>
+                <td>${h2.toFixed(2)}m</td>
+            `;
+        }
+
     }
 }
 
@@ -430,15 +457,15 @@ if (start_pulley) {
 
         id_pulley = setInterval(increment_time, 10)
 
-        const mkg_1 = parseFloat(document.getElementById("m_1").value)
-        const mkg_2 = parseFloat(document.getElementById("m_2").value)
-        const hm_1 = parseFloat(document.getElementById("h_1").value)
-        const hm_2 = parseFloat(document.getElementById("h_2").value)
+        // const mkg_1 = parseFloat(document.getElementById("m_1").value)
+        // const mkg_2 = parseFloat(document.getElementById("m_2").value)
+        // const hm_1 = parseFloat(document.getElementById("h_1").value)
+        // const hm_2 = parseFloat(document.getElementById("h_2").value)
 
-        // const mkg_1 = 8
-        // const mkg_2 = 10
-        // const hm_1 = 0.8
-        // const hm_2 = 0.7
+        const mkg_1 = 0.4
+        const mkg_2 = 0.3
+        const hm_1 = 0.8
+        const hm_2 = 0.7
 
         let m_1 = mkg_1
         let h_1 = hm_1
@@ -479,15 +506,13 @@ if (start_pulley) {
             let hit_pulley = null
 
             if (h1<=0 || h2<=0) {
-                console.log("AaaAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
                 hit_floor = true
                 hit_pulley = false
                 clearInterval(id_pulley)
                 id_pulley = setInterval(increment_time_after, 10)
             }
 
-            if (h1>=1.35 || h2>=1.35) {
-                console.log("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB")
+            if (h1>=1.285 || h2>=1.285) {
                 hit_floor = false
                 hit_pulley = true
                 clearInterval(id_pulley)
@@ -500,6 +525,10 @@ if (start_pulley) {
             <p>M1 Height: ${h1.toFixed(2)}m</p>
             <p>M2 Height: ${h2.toFixed(2)}m</p>
             `;
+            
+            model2.produce_data(t)
+
+
             return {t, hit_floor}
         }
 
@@ -517,13 +546,9 @@ if (start_pulley) {
             }
 
             console.log("t_after ", t_after)
-            model2.draw_after_break(t_after, m1_up, hit_floor)
+            model2.draw_after_break(t, t_after, m1_up, hit_floor)
 
 
-            document.getElementById("output").innerHTML = `
-            <p>M1 Height: ${h1.toFixed(2)}m</p>
-            <p>M2 Height: ${h2.toFixed(2)}m</p>
-            `;
         }
     });
 }
@@ -535,9 +560,88 @@ if (reset_pulley) {
         reset_pulley_canvas()
 
         document.getElementById("output").innerHTML = `
-            <p>M1 Height: </p>
-            <p>M2 Height: </p>
+        <p>M1 Height: </p>
+        <p>M2 Height: </p>
         `;
+
+        document.getElementById("data").innerHTML = `
+        <p>Tension: </p>
+        `
+
+        document.getElementById("table").innerHTML = `
+                <table>
+                <tr>
+                    <th>Time</th>
+                    <th>M1 Height</th>
+                    <th>M2 Height</th>
+                </tr>
+                <tr id="pulley1">
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr id="pulley2" style="display: none;">
+                    <td>M1 Height:</td>
+                    <td>M2 Height:</td>
+                </tr>
+                <tr id="pulley3" style="display: none;">
+                    <td>M1 Height:</td>
+                    <td>M2 Height:</td>
+                </tr>
+                <tr id="pulley4" style="display: none;">
+                    <td>M1 Height:</td>
+                    <td>M2 Height:</td>
+                </tr>
+                <tr id="pulley5" style="display: none;">
+                    <td>M1 Height:</td>
+                    <td>M2 Height:</td>
+                </tr>
+                <tr id="pulley6" style="display: none;">
+                    <td>M1 Height:</td>
+                    <td>M2 Height:</td>
+                </tr>
+                <tr id="pulley7" style="display: none;">
+                    <td>M1 Height:</td>
+                    <td>M2 Height:</td>
+                </tr>
+                <tr id="pulley8" style="display: none;">
+                    <td>M1 Height:</td>
+                    <td>M2 Height:</td>
+                </tr>
+                <tr id="pulley9" style="display: none;">
+                    <td>M1 Height:</td>
+                    <td>M2 Height:</td>
+                </tr>
+                <tr id="pulley10" style="display: none;">
+                    <td>M1 Height:</td>
+                    <td>M2 Height:</td>
+                </tr>
+                <tr id="pulley11" style="display: none;">
+                    <td>M1 Height:</td>
+                    <td>M2 Height:</td>
+                </tr>
+                <tr id="pulley12" style="display: none;">
+                    <td>M1 Height:</td>
+                    <td>M2 Height:</td>
+                </tr>
+                <tr id="pulley13" style="display: none;">
+                    <td>M1 Height:</td>
+                    <td>M2 Height:</td>
+                </tr>
+                <tr id="pulley14" style="display: none;">
+                    <td>M1 Height:</td>
+                    <td>M2 Height:</td>
+                </tr>
+                <tr id="pulley15" style="display: none;">
+                    <td>M1 Height:</td>
+                    <td>M2 Height:</td>
+                </tr>
+                <tr id="pulley16" style="display: none;">
+                    <td>M1 Height:</td>
+                    <td>M2 Height:</td>
+                </tr>
+                </table>
+        `
     });
 }
 
