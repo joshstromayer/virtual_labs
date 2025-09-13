@@ -1,7 +1,7 @@
 class Pulley {
     constructor(m_1, m_2, h_1, h_2) {
-        this.m_1 = m_1
-        this.m_2 = m_2
+        this.m_1 = m_1*0.001
+        this.m_2 = m_2*0.001
         this.h_1 = h_1
         this.h_2 = h_2
 
@@ -30,10 +30,6 @@ class Pulley {
 
         this.calulate_canvas_pos = (h) => {
             return h*20
-        }
-
-        this.calculate_height_break = () => {
-            return 
         }
     }
 
@@ -372,6 +368,8 @@ class Pulley {
             h2 = this.calculate_height_2_t_up(t)
         }
 
+        this.calculate_tension().toFixed(2)
+
         document.getElementById("data").innerHTML = `
         <p>Tension: ${this.calculate_tension().toFixed(2)}N</p>
 
@@ -457,15 +455,15 @@ if (start_pulley) {
 
         id_pulley = setInterval(increment_time, 10)
 
-        // const mkg_1 = parseFloat(document.getElementById("m_1").value)
-        // const mkg_2 = parseFloat(document.getElementById("m_2").value)
-        // const hm_1 = parseFloat(document.getElementById("h_1").value)
-        // const hm_2 = parseFloat(document.getElementById("h_2").value)
+        const mkg_1 = parseFloat(document.getElementById("m_1").value)
+        const mkg_2 = parseFloat(document.getElementById("m_2").value)
+        const hm_1 = parseFloat(document.getElementById("h_1").value)
+        const hm_2 = parseFloat(document.getElementById("h_2").value)
 
-        const mkg_1 = 0.4
-        const mkg_2 = 0.3
-        const hm_1 = 0.8
-        const hm_2 = 0.7
+        // const mkg_1 = 0.4
+        // const mkg_2 = 0.3
+        // const hm_1 = 0.8
+        // const hm_2 = 0.7
 
         let m_1 = mkg_1
         let h_1 = hm_1
