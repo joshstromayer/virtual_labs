@@ -7,24 +7,24 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header><a href="./index.html">Main page</a></header>
+    <header><a href="./index.html"><h1>Virtual Labs</h1></a></header>
     <main>
         <h1>Pulleys</h1>
         <div class="model_content">
             <div class="model_display">
-                <form id="projectileForm">
+                <form id="pulleyForm">
                     <div class="labels">
                         <label>Mass 1 (g)
-                            <input type="number" id="m_1">
+                            <input type="number" id="m_1" placeholder="300">
                         </label>
                         <label>Mass 2 (g)
-                            <input type="number" id="m_2">
+                            <input type="number" id="m_2" placeholder="450">
                         </label>
                         <label>Initial Height 1 (m)
-                            <input type="number" id="h_1">
+                            <input type="number" id="h_1" placeholder="0.4">
                         </label>
                         <label>Initial Height 2 (m)
-                            <input type="number" id="h_2">
+                            <input type="number" id="h_2" placeholder="0.6">
                         </label>
                     </div>
                     <div class="buttons">
@@ -36,98 +36,98 @@
                 <canvas class="canvas" id="myCanvas03" width="720" height="300" style="border:1px solid black;">
                 </canvas>
             </div>
-            
-            <div class="model_results">
-                <h2>Results</h2>
-                <div id="output">
-                    <p>M1 Height:</p>
-                    <p>M2 Height:</p>
-                    <p>Tension: </p>
-                </div>
-            </div>
-        </div>
-
-        <div class="data">
-            <h2>Data</h2>
-            <div id="data">
-            <p>Tension: </p>
-            </div>
-            
-            <div id="table">
-                <table>
-                <tr>
-                    <th>Time</th>
-                    <th>M1 Height</th>
-                    <th>M2 Height</th>
-                </tr>
-                <tr id="pulley1">
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr id="pulley2" style="display: none;">
-                    <td>M1 Height:</td>
-                    <td>M2 Height:</td>
-                </tr>
-                <tr id="pulley3" style="display: none;">
-                    <td>M1 Height:</td>
-                    <td>M2 Height:</td>
-                </tr>
-                <tr id="pulley4" style="display: none;">
-                    <td>M1 Height:</td>
-                    <td>M2 Height:</td>
-                </tr>
-                <tr id="pulley5" style="display: none;">
-                    <td>M1 Height:</td>
-                    <td>M2 Height:</td>
-                </tr>
-                <tr id="pulley6" style="display: none;">
-                    <td>M1 Height:</td>
-                    <td>M2 Height:</td>
-                </tr>
-                <tr id="pulley7" style="display: none;">
-                    <td>M1 Height:</td>
-                    <td>M2 Height:</td>
-                </tr>
-                <tr id="pulley8" style="display: none;">
-                    <td>M1 Height:</td>
-                    <td>M2 Height:</td>
-                </tr>
-                <tr id="pulley9" style="display: none;">
-                    <td>M1 Height:</td>
-                    <td>M2 Height:</td>
-                </tr>
-                <tr id="pulley10" style="display: none;">
-                    <td>M1 Height:</td>
-                    <td>M2 Height:</td>
-                </tr>
-                <tr id="pulley11" style="display: none;">
-                    <td>M1 Height:</td>
-                    <td>M2 Height:</td>
-                </tr>
-                <tr id="pulley12" style="display: none;">
-                    <td>M1 Height:</td>
-                    <td>M2 Height:</td>
-                </tr>
-                <tr id="pulley13" style="display: none;">
-                    <td>M1 Height:</td>
-                    <td>M2 Height:</td>
-                </tr>
-                <tr id="pulley14" style="display: none;">
-                    <td>M1 Height:</td>
-                    <td>M2 Height:</td>
-                </tr>
-                <tr id="pulley15" style="display: none;">
-                    <td>M1 Height:</td>
-                    <td>M2 Height:</td>
-                </tr>
-                <tr id="pulley16" style="display: none;">
-                    <td>M1 Height:</td>
-                    <td>M2 Height:</td>
-                </tr>
-                <tr id="pulley17" style="display: none;"></tr>
-                <tr id="pulley18" style="display: none;"></tr>
-                </table>
-            </div>
+                    <div class="data">
+                        <h2>Data</h2>
+                        <div id="data">
+                        <p>Tension: </p>
+                        </div>
+                        
+                        <div id="table">
+                            <table class="table">
+                            <tr>
+                                <th>Time</th>
+                                <th>M1 Height</th>
+                                <th>M2 Height</th>
+                            </tr>
+                            <tr id="pulley1">
+                                <td>0.1s</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr id="pulley2">
+                                <td>0.2s</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr id="pulley3">
+                                <td>0.3s</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr id="pulley4">
+                                <td>0.4s</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr id="pulley5">
+                                <td>0.5s</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr id="pulley6">
+                                <td>0.6s</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr id="pulley7">
+                                <td>0.7s</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr id="pulley8">
+                                <td>0.8s</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr id="pulley9">
+                                <td>0.9s</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr id="pulley10">
+                                <td>1.0s</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr id="pulley11" style="display: none;">
+                                <td>M1 Height:</td>
+                                <td>M2 Height:</td>
+                            </tr>
+                            <tr id="pulley12" style="display: none;">
+                                <td>M1 Height:</td>
+                                <td>M2 Height:</td>
+                            </tr>
+                            <tr id="pulley13" style="display: none;">
+                                <td>M1 Height:</td>
+                                <td>M2 Height:</td>
+                            </tr>
+                            <tr id="pulley14" style="display: none;">
+                                <td>M1 Height:</td>
+                                <td>M2 Height:</td>
+                            </tr>
+                            <tr id="pulley15" style="display: none;">
+                                <td>M1 Height:</td>
+                                <td>M2 Height:</td>
+                            </tr>
+                            <tr id="pulley16" style="display: none;">
+                                <td>M1 Height:</td>
+                                <td>M2 Height:</td>
+                            </tr>
+                            <tr id="pulley17" style="display: none;"></tr>
+                            <tr id="pulley18" style="display: none;"></tr>
+                            </table>
+                        </div>
+                    </div>
         </div>
     </main>
     <script src="pulleys.js"></script>

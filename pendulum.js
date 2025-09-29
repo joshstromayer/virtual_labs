@@ -159,6 +159,46 @@ class Pendulum {
             ctx02a.arc(this.calculate_x_position_canvas_example(), this.calculate_y_position_canvas_example(), 4, 0, 2*Math.PI)
             ctx02a.stroke()
         }
+
+        produce_data(t) {
+            let time = t.toFixed(1)*10
+            let h1 = null
+            let h2 = null
+    
+            if (this.m_1 > this.m_2) {
+                this.m1_up = false
+            } else {
+                this.m1_up = true
+            }
+    
+            if (this.m1_up === true) {
+                h1 = this.calculate_height_1_t_up(t)
+                h2 = this.calculate_height_2_t_down(t)
+            } else {
+                h1 = this.calculate_height_1_t_down(t)
+                h2 = this.calculate_height_2_t_up(t)
+            }
+    
+            document.getElementById("data").innerHTML = `
+            <p>Tension: ${this.calculate_tension().toFixed(2)}N</p>
+    
+            `;
+    
+            if (time % 1 === 0) {
+                console.log("t in data: ", time)
+    
+                let id = "pulley" + time
+    
+                document.getElementById(id).style.display='block'
+    
+                document.getElementById(id).innerHTML = `
+                    <td>${time/10}s</td>
+                    <td>${h1.toFixed(2)}m</td>
+                    <td>${h2.toFixed(2)}m</td>
+                `;
+            }
+    
+        }
 }
 
 class PendulumDamping {
@@ -178,6 +218,35 @@ const set_pendulum_template = () => {
     ctx.beginPath()
     ctx.arc(360, 270, 8, 0, 2*Math.PI)
     ctx.stroke()
+
+    // arrow for scale
+
+    ctx.moveTo(10, 30)
+    ctx.lineTo(10, 150)
+    ctx.stroke()
+
+    ctx.moveTo(10, 175)
+    ctx.lineTo(10, 300)
+    ctx.stroke()
+
+    ctx.moveTo(10, 30)
+    ctx.lineTo(15, 35)
+    ctx.stroke()
+
+    ctx.moveTo(10, 30)
+    ctx.lineTo(5, 35)
+    ctx.stroke()
+
+    ctx.moveTo(10, 300)
+    ctx.lineTo(15, 295)
+    ctx.stroke()
+
+    ctx.moveTo(10, 300)
+    ctx.lineTo(5, 295)
+    ctx.stroke()
+
+    ctx.font = "12px Arial"
+    ctx.fillText("32cm", 5, 165)
 }
 
 const canvas = document.getElementById("myCanvas");
@@ -199,22 +268,12 @@ if (start_pendulum) {
         const m_kg = parseFloat(document.getElementById("mass_bob").value)
         const l_cm = parseFloat(document.getElementById("string_length").value)
         const theta_initial = parseFloat(document.getElementById("theta_initial").value)
-        const damping = document.getElementById("damping").checked
         
         // const m_kg = 13
-        // const l_cm = 30
+        // const l_cm = 32
         // const theta_initial = 45
-        // const damping = false
     
-        let model = null
-    
-        if (damping === false) {
-            model = new Pendulum(m_kg, l_cm, theta_initial)
-        } else {
-            model = new PendulumDamping(m_kg, l_cm, theta_initial, damping)
-        } 
-    
-        // const model = new Pendulum(m_kg, l_cm, theta_initial, damping) 
+        const model = new Pendulum(m_kg, l_cm, theta_initial)
         
         id_pendulum = setInterval(increment_time, 10)
     

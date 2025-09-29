@@ -331,23 +331,22 @@ class Pulley {
     
         ctx03a.beginPath()
         ctx03a.moveTo(350/2, 15)
-        ctx03a.lineTo(350/2, this.calculate_height_1_t(t)*10)
+        ctx03a.lineTo(350/2, this.calculate_height_1_t_up(t)*10)
         ctx03a.stroke()
     
         ctx03a.beginPath()
         ctx03a.moveTo(370/2, 15)
-        ctx03a.lineTo(370/2, this.calculate_height_2_t(t)*10)
+        ctx03a.lineTo(370/2, this.calculate_height_2_t_down(t)*10)
         ctx03a.stroke()
     
         ctx03a.beginPath()
-        ctx03a.arc(350/2, this.calculate_height_1_t(t)*10, 3, 0, 2*Math.PI)
+        ctx03a.arc(350/2, this.calculate_height_1_t_up(t)*10, 3, 0, 2*Math.PI)
         ctx03a.stroke()
     
         ctx03a.beginPath()
-        ctx03a.arc(370/2, this.calculate_height_2_t(t)*10, 3, 0, 2*Math.PI)
+        ctx03a.arc(370/2, this.calculate_height_2_t_down(t)*10, 3, 0, 2*Math.PI)
         ctx03a.stroke()
     }
-
     // MAKE COLUMNS FOR KINETIC ENERGY ETC
     produce_data(t) {
         let time = t.toFixed(1)*10
@@ -368,7 +367,7 @@ class Pulley {
             h2 = this.calculate_height_2_t_up(t)
         }
 
-        this.calculate_tension().toFixed(2)
+        
 
         document.getElementById("data").innerHTML = `
         <p>Tension: ${this.calculate_tension().toFixed(2)}N</p>
@@ -380,7 +379,7 @@ class Pulley {
 
             let id = "pulley" + time
 
-            document.getElementById(id).style.display='block'
+            document.getElementById(id).style.display='flex'
 
             document.getElementById(id).innerHTML = `
                 <td>${time/10}s</td>
@@ -460,8 +459,8 @@ if (start_pulley) {
         const hm_1 = parseFloat(document.getElementById("h_1").value)
         const hm_2 = parseFloat(document.getElementById("h_2").value)
 
-        // const mkg_1 = 0.4
-        // const mkg_2 = 0.3
+        // const mkg_1 = 400
+        // const mkg_2 = 300
         // const hm_1 = 0.8
         // const hm_2 = 0.7
 
@@ -484,6 +483,81 @@ if (start_pulley) {
         let t = 0;
         let t_after = 0
         let hit_floor = null
+
+        document.getElementById("table").innerHTML = `
+        <table class="table">
+        <tr>
+            <th>Time</th>
+            <th>M1 Height</th>
+            <th>M2 Height</th>
+        </tr>
+        <tr id="pulley1" style="display: none;">
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr id="pulley2" style="display: none;">
+            <td>M1 Height:</td>
+            <td>M2 Height:</td>
+        </tr>
+        <tr id="pulley3" style="display: none;">
+            <td>M1 Height:</td>
+            <td>M2 Height:</td>
+        </tr>
+        <tr id="pulley4" style="display: none;">
+            <td>M1 Height:</td>
+            <td>M2 Height:</td>
+        </tr>
+        <tr id="pulley5" style="display: none;">
+            <td>M1 Height:</td>
+            <td>M2 Height:</td>
+        </tr>
+        <tr id="pulley6" style="display: none;">
+            <td>M1 Height:</td>
+            <td>M2 Height:</td>
+        </tr>
+        <tr id="pulley7" style="display: none;">
+            <td>M1 Height:</td>
+            <td>M2 Height:</td>
+        </tr>
+        <tr id="pulley8" style="display: none;">
+            <td>M1 Height:</td>
+            <td>M2 Height:</td>
+        </tr>
+        <tr id="pulley9" style="display: none;">
+            <td>M1 Height:</td>
+            <td>M2 Height:</td>
+        </tr>
+        <tr id="pulley10" style="display: none;">
+            <td>M1 Height:</td>
+            <td>M2 Height:</td>
+        </tr>
+        <tr id="pulley11" style="display: none;">
+            <td>M1 Height:</td>
+            <td>M2 Height:</td>
+        </tr>
+        <tr id="pulley12" style="display: none;">
+            <td>M1 Height:</td>
+            <td>M2 Height:</td>
+        </tr>
+        <tr id="pulley13" style="display: none;">
+            <td>M1 Height:</td>
+            <td>M2 Height:</td>
+        </tr>
+        <tr id="pulley14" style="display: none;">
+            <td>M1 Height:</td>
+            <td>M2 Height:</td>
+        </tr>
+        <tr id="pulley15" style="display: none;">
+            <td>M1 Height:</td>
+            <td>M2 Height:</td>
+        </tr>
+        <tr id="pulley16" style="display: none;">
+            <td>M1 Height:</td>
+            <td>M2 Height:</td>
+        </tr>
+        </table>
+    `
         
         function increment_time() {
             t += 0.01;
@@ -518,12 +592,12 @@ if (start_pulley) {
             }
 
             model2.draw(t, m1_up)
-
-            document.getElementById("output").innerHTML = `
-            <p>M1 Height: ${h1.toFixed(2)}m</p>
-            <p>M2 Height: ${h2.toFixed(2)}m</p>
-            `;
             
+            
+            document.getElementById("data").innerHTML = `
+            <p>Tension: ${model2.calculate_tension().toFixed(2)}</p>
+            `
+
             model2.produce_data(t)
 
 
@@ -557,62 +631,66 @@ if (reset_pulley) {
         event.preventDefault();
         reset_pulley_canvas()
 
-        document.getElementById("output").innerHTML = `
-        <p>M1 Height: </p>
-        <p>M2 Height: </p>
-        `;
-
         document.getElementById("data").innerHTML = `
         <p>Tension: </p>
         `
 
         document.getElementById("table").innerHTML = `
-                <table>
+                <table class="table">
                 <tr>
                     <th>Time</th>
                     <th>M1 Height</th>
                     <th>M2 Height</th>
                 </tr>
                 <tr id="pulley1">
+                    <td>0.1s</td>
                     <td></td>
                     <td></td>
+                </tr>
+                <tr id="pulley2">
+                    <td>0.2s</td>
+                    <td></td>
                     <td></td>
                 </tr>
-                <tr id="pulley2" style="display: none;">
-                    <td>M1 Height:</td>
-                    <td>M2 Height:</td>
+                <tr id="pulley3">
+                    <td>0.3s</td>
+                    <td></td>
+                    <td></td>
                 </tr>
-                <tr id="pulley3" style="display: none;">
-                    <td>M1 Height:</td>
-                    <td>M2 Height:</td>
+                <tr id="pulley4">
+                    <td>0.4s</td>
+                    <td></td>
+                    <td></td>
                 </tr>
-                <tr id="pulley4" style="display: none;">
-                    <td>M1 Height:</td>
-                    <td>M2 Height:</td>
+                <tr id="pulley5">
+                    <td>0.5s</td>
+                    <td></td>
+                    <td></td>
                 </tr>
-                <tr id="pulley5" style="display: none;">
-                    <td>M1 Height:</td>
-                    <td>M2 Height:</td>
+                <tr id="pulley6">
+                    <td>0.6s</td>
+                    <td></td>
+                    <td></td>
                 </tr>
-                <tr id="pulley6" style="display: none;">
-                    <td>M1 Height:</td>
-                    <td>M2 Height:</td>
+                <tr id="pulley7">
+                    <td>0.7s</td>
+                    <td></td>
+                    <td></td>
                 </tr>
-                <tr id="pulley7" style="display: none;">
-                    <td>M1 Height:</td>
-                    <td>M2 Height:</td>
+                <tr id="pulley8">
+                    <td>0.8s</td>
+                    <td></td>
+                    <td></td>
                 </tr>
-                <tr id="pulley8" style="display: none;">
-                    <td>M1 Height:</td>
-                    <td>M2 Height:</td>
+                <tr id="pulley9">
+                    <td>0.9s</td>
+                    <td></td>
+                    <td></td>
                 </tr>
-                <tr id="pulley9" style="display: none;">
-                    <td>M1 Height:</td>
-                    <td>M2 Height:</td>
-                </tr>
-                <tr id="pulley10" style="display: none;">
-                    <td>M1 Height:</td>
-                    <td>M2 Height:</td>
+                <tr id="pulley10">
+                    <td>1.0s</td>
+                    <td></td>
+                    <td></td>
                 </tr>
                 <tr id="pulley11" style="display: none;">
                     <td>M1 Height:</td>
@@ -638,6 +716,8 @@ if (reset_pulley) {
                     <td>M1 Height:</td>
                     <td>M2 Height:</td>
                 </tr>
+                <tr id="pulley17" style="display: none;"></tr>
+                <tr id="pulley18" style="display: none;"></tr>
                 </table>
         `
     });
@@ -692,8 +772,8 @@ if (canvas03a) {
 
         id_pulley = setInterval(increment_time, 10)
 
-        const mkg_1 = 8
-        const mkg_2 = 7
+        const mkg_1 = 300
+        const mkg_2 = 400
         const hm_1 = 7.3
         const hm_2 = 8.8
 
@@ -723,10 +803,11 @@ if (canvas03a) {
         
             model2.step(t)
         
-            let h1 = model2.calculate_height_1_t(t)
-            let h2 = model2.calculate_height_2_t(t)
+            let h1 = model2.calculate_height_1_t_up(t)
+            let h2 = model2.calculate_height_2_t_down(t)
 
             model2.draw_example(t)
+            console.log("drawingggg")
 
             if (h1*10<20 || h2*10<20 || h1*10>295/2 || h2*10>295/2) {
                 pause_pulley_canvas()
@@ -734,7 +815,9 @@ if (canvas03a) {
             
             return t
         }
-    });
+    })
+}
+
     canvas03a.addEventListener("mouseover", (event) => {
         reset_pulley_canvas_example();
     })
@@ -745,8 +828,8 @@ if (canvas03a) {
 
         id_pulley = setInterval(increment_time, 10)
 
-        const mkg_1 = 8
-        const mkg_2 = 7
+        const mkg_1 = 300
+        const mkg_2 = 400
         const hm_1 = 7.3
         const hm_2 = 8.8
 
@@ -776,10 +859,11 @@ if (canvas03a) {
         
             model2.step(t)
         
-            let h1 = model2.calculate_height_1_t(t)
-            let h2 = model2.calculate_height_2_t(t)
+            let h1 = model2.calculate_height_1_t_up(t)
+            let h2 = model2.calculate_height_2_t_down(t)
 
             model2.draw_example(t)
+            console.log("drawingggg")
 
             if (h1*10<20 || h2*10<20 || h1*10>295/2 || h2*10>295/2) {
                 pause_pulley_canvas()
@@ -788,4 +872,3 @@ if (canvas03a) {
             return t
         }
     })
-}

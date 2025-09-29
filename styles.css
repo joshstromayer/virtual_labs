@@ -1,20 +1,26 @@
 html {
-    width: 1024px;
+    width: 100%;
+}
+
+body {
+    width: 100%;
+    margin: 0;
 }
 
 header {
     height: 50px;
-    width: 1024px;
+    width: 100%;
+    top: 0;
+    right: 0;
 }
 
 main {
     display: block;
     left: 0;
-    max-width: 1024px;
-    width: 1024px;
-    padding: 20px 0px;
+    max-width: 100%;
+    padding: 10px;
+    width: calc(100%-10px);
     margin: 0;
-    background-color: rgb(245, 247, 255);
 }
 
 
@@ -30,18 +36,16 @@ h1 {
 
 .grid-container {
     display: grid;
-    grid-template-columns: auto auto;
+    grid-template-columns: auto auto auto;
     width: 100%;
-    max-width: 1024px;
+    max-width: 100%;
     gap: 20px 10px;
-    background-color: rgb(235, 247, 255);
 }
 
 .grid {
     width: auto;
-    min-width: 400px;
+    width: 400px;
     padding: 20px;
-    background-color: rgb(230, 244, 253);
     display: flex;
     flex-direction: column;
 }
@@ -54,8 +58,7 @@ h1 {
 .labels {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    min-width: 580px;
-    max-width: 580px;
+    width: calc(100%-10px);
 }
 
 .view_model {
@@ -77,89 +80,119 @@ h1 {
 
 .canvas {
     background-color: white;
-}
-
-#projectileForm {
-    display: flex;
-    width: 720px;
-}
-
-#pendulumForm {
-    display: flex;
-    width: 720px;
-
-}
-
-#projectileForm label {
-    display: flex;
-    flex: row;
-    margin-left: 10px;
-    margin-right: 40px;
-    align-items: center;
-}
-
-#projectileForm input {
-    width: 50px;
-    margin-left: 10px;
-}
-
-#pendulumForm label {
-    display: flex;
-    flex: row;
-    margin-left: 10px;
-    margin-right: 40px;
-    align-items: center;
-}
-
-#pendulumForm input {
-    width: 50px;
-    margin-left: 10px;
-}
-
-.buttons {
-    right: 0;
+    width: 100%;
 }
 
 .model_content {
     display: flex;
-    flex-direction: row;
-    background-color: rgb(235, 247, 255);
+    flex-direction: column;
 }
 
-.model_results {
-    padding: 20px;
+.model_content form input {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 50px;
+    margin-left: 10px;
 }
 
-table {
-    background-color: white;
-    border-width: 1px;
-    border: 1px solid;
-    border-style: solid;
-    padding: 0;
+.model_content form label {
+    display: flex;
+    margin-left: 10px;
+    margin-right: 40px;
+    align-items: center;
 }
 
-tbody {
-    padding: 0;
+.buttons {
+    display: flex;
+    justify-content: right;
+    gap: 10px;
 }
 
-tr {
-    margin-top: 3px;
-    width: 600px;
+#projectileForm {
     display: flex;
     flex-direction: row;
+    justify-content: space-evenly;
 }
 
-td, th {
-    width: 300px;
+#projectileForm label {
+    width: 120px;
+}
+
+.data {
+    padding: 10px;
+    width: calc(100% - 20px);
+    height: 100%;
+}
+
+.table {
+    border-collapse: collapse;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.table tbody {
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.table tr {
+    margin-top: 3px;
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    width: 100%;
+}
+
+.table th {
     border: 1px solid;
-}
-
-th {
-    height: 30px;
-}
-
-td {
-    height: 20px;
-    width: 280px;
+    flex: 1;
     text-align: center;
+}
+.table td {
+    border: 1px solid;
+    flex: 1;
+    text-align: center;
+    height: 20px;
+}
+
+#pulley1 {
+    flex: 1;
+    text-align: center;
+}
+
+@media (min-width: 880px) {
+    .labels {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .model_display {
+        width: 60%;
+    }
+
+    .model_content {
+        flex-direction: row;
+    }
+
+    /* .data {
+        width: 100%;
+    }
+
+    #table {
+    }
+
+    tbody {
+        
+    } */
+}
+
+@media (min-width: 1400px) {
+    .model_display{
+        width: 100%;
+    }
 }

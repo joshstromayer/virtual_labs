@@ -7,29 +7,31 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header><a href="./index.html">Main page</a></header>
+    <header><a href="./index.html"><h1>Virtual Labs</h1></a></header>
     <main>
         <h1>Projectile Motion</h1>
         <div class="model_content">
             <div class="model_display">
                 <form id="projectileForm">
-                    <label>Initial Velocity (m/s)
-                        <input type="number" id="initial_velocity">
-                    </label>
-                    <label>Theta (ø)
-                        <input type="number" id="theta">
-                    </label>
-                    <div class="buttons">
-                        <button type="submit" id="start_proj_mot" class="form-button">Calculate</button>
-                        <button type="submit" id="reset_proj_mot" class="form-button">Reset</button>
+                    <div>
+                        <label>Initial Velocity (m/s)
+                            <input type="number" id="initial_velocity">
+                        </label>
                     </div>
+                    <div>
+                    <label>Theta (ø)
+                            <input type="number" id="theta">
+                        </label>
+                        </div>
+                        <div><button type="submit" id="start_proj_mot" class="form-button">Calculate</button></div>
+                        <div><button type="submit" id="reset_proj_mot" class="form-button">Reset</button></div>
                 </form>
 
                 <canvas class="canvas" id="myCanvas01" width="720" height="300" style="border:1px solid black;">
                 </canvas>
             </div>
             
-            <div class="model_results">
+            <div class="data">
                 <h2>Results</h2>
                 <div id="output">
                     <p>x Position:</p>
@@ -39,10 +41,6 @@
                     <p>Maximum Height Reached: </p>
                 </div>
             </div>
-        </div>
-
-        <div class="data">
-            <h2>Data</h2>
         </div>
     </main>
     <script src="projectile_motion.js"></script>

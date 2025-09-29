@@ -7,12 +7,11 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header><a href="./index.html">Main page</a></header>
+    <header><a href="./index.html"><h1>Virtual Labs</h1></a></header>
     <main>
         <h1>Pendulum</h1>
         <div class="model_content">
             <div class="model_display">
-
                 <form id="pendulumForm">
                     <div class="labels">
                         <label>Mass of Bob (kg)
@@ -24,18 +23,102 @@
                         <label>Initial Angle (degrees)
                             <input type="number" id="theta_initial">
                         </label>
-                        <label>Damping
-                            <input type="checkbox" id="damping" value="true">
-                        </label>
                     </div>
                     <div class="buttons">
                         <button type="submit" id="start_pendulum" class="form-button">Calculate</button>
                         <button type="submit" id="reset_pendulum" class="form-button">Reset</button>
                     </div>
                 </form>
-                <canvas id="myCanvas" width="720" height="300" style="border:1px solid black;">
+                
+                <canvas class="canvas" id="myCanvas" width="720" height="300" style="border:1px solid black;">
                 </canvas>
             </div>
+            <div class="data">
+                <h2>Data</h2>
+                <div id="data">
+                <p>Tension: </p>
+                </div>
+                
+                <div id="table">
+                    <table class="table">
+                    <tr>
+                        <th>Time</th>
+                        <th>KE</th>
+                        <th>GPE</th>
+                        <th>Displacement</th>
+                    </tr>
+                    <tr id="pendulum1">
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr id="pendulum2" style="display: none;">
+                        <td>M1 Height:</td>
+                        <td>M2 Height:</td>
+                    </tr>
+                    <tr id="pendulum3" style="display: none;">
+                        <td>M1 Height:</td>
+                        <td>M2 Height:</td>
+                    </tr>
+                    <tr id="pendulum4" style="display: none;">
+                        <td>M1 Height:</td>
+                        <td>M2 Height:</td>
+                    </tr>
+                    <tr id="pendulum5" style="display: none;">
+                        <td>M1 Height:</td>
+                        <td>M2 Height:</td>
+                    </tr>
+                    <tr id="pendulum6" style="display: none;">
+                        <td>M1 Height:</td>
+                        <td>M2 Height:</td>
+                    </tr>
+                    <tr id="pendulum7" style="display: none;">
+                        <td>M1 Height:</td>
+                        <td>M2 Height:</td>
+                    </tr>
+                    <tr id="pendulum8" style="display: none;">
+                        <td>M1 Height:</td>
+                        <td>M2 Height:</td>
+                    </tr>
+                    <tr id="pendulum9" style="display: none;">
+                        <td>M1 Height:</td>
+                        <td>M2 Height:</td>
+                    </tr>
+                    <tr id="pendulum10" style="display: none;">
+                        <td>M1 Height:</td>
+                        <td>M2 Height:</td>
+                    </tr>
+                    <tr id="pendulum11" style="display: none;">
+                        <td>M1 Height:</td>
+                        <td>M2 Height:</td>
+                    </tr>
+                    <tr id="pendulum12" style="display: none;">
+                        <td>M1 Height:</td>
+                        <td>M2 Height:</td>
+                    </tr>
+                    <tr id="pendulum13" style="display: none;">
+                        <td>M1 Height:</td>
+                        <td>M2 Height:</td>
+                    </tr>
+                    <tr id="pendulum14" style="display: none;">
+                        <td>M1 Height:</td>
+                        <td>M2 Height:</td>
+                    </tr>
+                    <tr id="pendulum15" style="display: none;">
+                        <td>M1 Height:</td>
+                        <td>M2 Height:</td>
+                    </tr>
+                    <tr id="pendulum16" style="display: none;">
+                        <td>M1 Height:</td>
+                        <td>M2 Height:</td>
+                    </tr>
+                    <tr id="pendulum17" style="display: none;"></tr>
+                    <tr id="pendulum18" style="display: none;"></tr>
+                    </table>
+                </div>
+            </div>
+        </div>
             <div class="model_results">
                 <h2>Results</h2>
                 <div id="pendulum-output">
@@ -47,7 +130,7 @@
                     <p>y-Position: </p>
                 </div>
             </div>
-        </div>
+
     </main>    
     <script src="pendulum.js"></script>
 </body>
